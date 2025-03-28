@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sustaina co.ltd</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e9ecef;
+      padding: 20px;
+    }
+    .checkout-container {
+      background: #fff;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .product-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .product-info h3 {
+      margin: 5px 0;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      width: 100%;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+    
+    <!-- Section to show product details (populated from URL parameters) -->
+    <div class="product-info">
+    </div>
+    
+    <!-- Order Form -->
+    <!-- Replace the action URL with your Formspree endpoint -->
+    <form action="https://formspree.io/f/xblgadyr" method="POST">
+      
+      <!-- Hidden fields to pass product details -->
+      <input type="hidden" id="hidden-product" name="product">
+      <input type="hidden" id="hidden-price" name="price">
+      
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" placeholder="Your address" rows="3" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Your phone number" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="quantity">Number of Items</label>
+        <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" min="1" required>
+      </div>
+      
+      <button type="submit" class="submit-btn">Place Order</button>
+    </form>
+  </div>
+  
+  <script>
+    // Function to get URL parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    
+    // Populate product info on the checkout page using URL parameters
+    const product = getQueryParam('product') || "Unknown Product";
+    const price = getQueryParam('price') || "0";
+    
+    document.getElementById('product-name').textContent = product;
+    document.getElementById('product-price').textContent = "Price: ₹" + price;
+    document.getElementById('hidden-product').value = product;
+    document.getElementById('hidden-price').value = price;
+  </script>
+  
+</body>
+</html>
